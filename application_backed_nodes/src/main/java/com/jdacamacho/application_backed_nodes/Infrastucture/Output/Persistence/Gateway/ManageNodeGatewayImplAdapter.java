@@ -3,10 +3,12 @@ package com.jdacamacho.application_backed_nodes.Infrastucture.Output.Persistence
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import com.jdacamacho.application_backed_nodes.Application.Output.ManageNodeGatewayIntPort;
 import com.jdacamacho.application_backed_nodes.Domain.Models.Node;
+import com.jdacamacho.application_backed_nodes.Infrastucture.Output.Persistence.Entities.NodeEntity;
 import com.jdacamacho.application_backed_nodes.Infrastucture.Output.Persistence.Repositories.NodeRepository;
 
 @Service
@@ -23,52 +25,47 @@ public class ManageNodeGatewayImplAdapter implements ManageNodeGatewayIntPort{
 
     @Override
     public List<Node> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        Iterable<NodeEntity> data = this.serviceBD.findAll();
+        List<Node> response = this.mapper.map(data, new TypeToken<List<Node>>(){}.getType());
+        return response;
     }
 
     @Override
     public List<Node> findAllByName(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAllByName'");
+        List<NodeEntity> data = this.serviceBD.findAllByNameContainingIgnoreCase(name);
+        List<Node> response = this.mapper.map(data, new TypeToken<List<Node>>(){}.getType());
+        return response;
     }
 
     @Override
     public Node save(Node node) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        NodeEntity nodeToSave = this.mapper.map(node, NodeEntity.class);
+        NodeEntity nodeSaved = this.serviceBD.save(nodeToSave);
+        Node response = this.mapper.map(nodeSaved, Node.class);
+        return response;
     }
 
     @Override
     public Node findById(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        NodeEntity data = this.serviceBD.findById(id).get();
+        Node response = this.mapper.map(data, Node.class);
+        return response;
     }
 
     @Override
     public void delete(Node node) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        NodeEntity nodeToDelete = this.mapper.map(node, NodeEntity.class);
+        this.serviceBD.delete(nodeToDelete);
     }
 
     @Override
     public boolean existsById(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'existsById'");
+        return this.serviceBD.existsById(id);
     }
 
     @Override
     public boolean existsByName(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'existsByName'");
+        return this.serviceBD.existsByName(name);
     }
-
-    @Override
-    public boolean existsByCoordinates(double valueX, double valueY) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'existsByCoordinates'");
-    }
-
-    
     
 }

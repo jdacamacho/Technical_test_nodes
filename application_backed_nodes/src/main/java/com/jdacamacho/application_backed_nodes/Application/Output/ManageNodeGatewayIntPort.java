@@ -12,5 +12,4 @@ public interface ManageNodeGatewayIntPort {
     public void delete (Node node);
     public boolean existsById(long id);
     public boolean existsByName(String name);
-    public boolean existsByCoordinates(double valueX , double valueY);
 }
