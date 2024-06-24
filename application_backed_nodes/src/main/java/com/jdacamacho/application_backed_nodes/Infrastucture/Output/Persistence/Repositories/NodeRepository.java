@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.jdacamacho.application_backed_nodes.Infrastucture.Output.Persistence.Entities.NodeEntity;
 
 @Repository
-public interface NodeRepository extends JpaRepository< NodeEntity, Long> {
+public interface NodeRepository extends JpaRepository<NodeEntity, Long> {
     List<NodeEntity> findAllByNameContainingIgnoreCase(String name);
     boolean existsByName(String name);
 }
