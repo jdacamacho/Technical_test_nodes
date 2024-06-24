@@ -16,7 +16,7 @@ public class NodeDTORequest {
     private String name;
 
     @NotBlank(message = "Description cannot be blank")
-    @Size(min = 10, max = 500, message = "Description must be between 10 and 500 characters")
+    @Size(min = 10, max = 400, message = "Description must be between 10 and 400 characters")
     private String description;
 
     @Valid
