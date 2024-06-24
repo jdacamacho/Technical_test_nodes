@@ -12,6 +12,7 @@ public enum ErrorCode {
     ENTITY_NOT_FOUND("GC-0003", "ERROR, COULDN'T FOUND ENTITY"),
     BUSINESS_RULE_VIOLATION("GC-0004", "ERROR, BUSINESS RULE HAS BEEN VIOLATED"),
     NO_DATA("GC-0005", "ERROR, NO DATA");
+    
     private final String code;
     private final String messageKey;
 }
