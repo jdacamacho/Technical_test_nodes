@@ -109,7 +109,7 @@ public class NodeRestController {
 
         try {
             NodeDTOResponse objNode = this.mapper.mapModelToResponse(this.nodeCU.updateNode(id, node));
-            return new ResponseEntity<NodeDTOResponse>(objNode, HttpStatus.CREATED);
+            return new ResponseEntity<NodeDTOResponse>(objNode, HttpStatus.OK);
         } catch (DataAccessException e) {
             response.put("message", "Error when updating into database");
             response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
