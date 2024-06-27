@@ -1,0 +1,30 @@
+version: '3' 
+
+services:
+  application_backed_nodes:
+    build: application_backed_nodes
+    ports:
+      - "5000:5000"
+    environment:
+      DB_URL: jdbc:mysql://nodes_application:3306/technical_test?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: Julian2k191002perla
+    restart: always
+    depends_on:
+      nodes_application:
+        condition: service_healthy 
+  nodes_application:
+    image: mysql:8.0.33
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Julian2k191002perla
+      MYSQL_PASSWORD: Julian2k191002perla
+      MYSQL_DATABASE: technical_test
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+  
+
